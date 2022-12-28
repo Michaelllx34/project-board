@@ -1,0 +1,73 @@
+# 기존의 파일에 있는 내용은 나열형이라 보기 안좋아서 비선호(application.xxx은 옛날식 잔재 -> 잘 안씀)
+# 들여쓰기가 중요
+
+# 깃에 포함되면 안되는 파일이니까 포함x
+# 확장명은.yml 혹은 .yaml 둘 다 가능
+
+
+#debug: false
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include:
+
+debug: false
+management.endpoints.web.exposure.include: "*"
+
+logging:
+  level:
+    com.koreait.projectboard: debug                       # 프로젝트에 해당하는 것만 찍어달라(쓸모 없는거까지 다 찍지 말고)
+    org.springframework.web.servlet: debug                # 서블릿 동작할때 해당하는 것들 찍어달라
+    org.hibernate.type.descriptor.sql.BasicBinder: trace  # 하이버네이트를 sql 만들 때 하는 기본 틀 작성해달라??
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/aidev
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    defer-datasource-initialization: true     # jpa가 데이터베이스와 연결되어서 초기화됨
+    hibernate.ddl-auto: create                # 하이버네이터가 ddl(=crud)를 만들어낸다.
+    show-sql: true                            # 콘솔창에 찍어냄
+    properties:
+      hibernate.format_sql: true              # 예쁘게 출력되게 해줌(한줄로 안나오는걸 나오게 해줌?)
+      hibernate.default_batch_fetch_size: 100 # 조인할 때 한번에 셀렉트 하던걸 여러번에 걸쳐 셀렉트 할 때가 있음(하이버네이트 오류)
+                                              # 연속되는 셀렉트 할 때 한번에 사용할 수 있도록 size 100까지 뭉쳐서 셀렉트 하게 해달라.
+  h2.console.enabled: true
+  sql.init.mode: always                       # 시작하자마자 쿼리문을 쓰고 싶을 때. 프로그램이 동작과 동시에 시작하게끔 만들 수 있음.
+
+server.port: 8889
+
+
+
+
+
+
+## 강사님 코드
+#debug: false
+#management.endpoints.web.exposure.include: "*"
+#
+#logging:
+#  level:
+#    com.koreait.projectboard: debug
+#    org.springframework.web.servlet: debug
+#    org.hibernate.type.descriptor.sql.BasicBinder: trace
+#
+#spring:
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/aidev
+#    username: root
+#    password: 1234
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#  jpa:
+#    defer-datasource-initialization: true
+#    hibernate.ddl-auto: create
+#    show-sql: true
+#    properties:
+#      hibernate.format_sql: true
+#      hibernate.default_batch_fetch_size: 100
+#  h2.console.enabled: true
+#  sql.init.mode: always
