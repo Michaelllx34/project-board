@@ -3,10 +3,11 @@ package com.koreait.projectboard.domain;
 import com.koreait.projectboard.config.JpaConfig;
 import com.koreait.projectboard.repository.ArticleCommentRepository;
 import com.koreait.projectboard.repository.ArticleRepository;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework./**/boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -14,9 +15,10 @@ import java.util.List;
 
 
 import static org.assertj.core.api.Assertions.assertThat;  // assertThat import 후 hasSize 사용하려면 이걸로 import
-//import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+//import static org.assertj.core.api.AssertionsForClassTypes.assertThat;    // 이거 남아있으니까 오류남...;;
 //import static org.junit.jupiter.api.Assertions.*;
 
+@Disabled("Spring Data REST 테스트는 불필요하므로 제외시킴")
 @Import(JpaConfig.class)    // main에 있는 내용을 여기에 적용시키려면 import해서 써야하는데 어노테이션을 선언해야함?
 @DisplayName("JPA 연결 테스트")      // 왼쪽 아래 TEst란?에[ 이름 표시 가능
 @DataJpaTest        // Jpa를 활용할 수 있는 Test 가능
@@ -64,7 +66,7 @@ class JpaRepositoryTest {
         Article article = articleRepository.findById(1L).orElseThrow();     // 존재하지 않으면 Throw
         long preArticleCount = articleRepository.count();                   // 이전 카운트를 센다. 지워졌는ㄴ지 안지워졌는지 확인
         long preArticleCommentCount = articleCommentRepository.count();     // 댓글 개수 카운트
-        int deletedCommentsSize = article.getArticleComments().size();  // 사이즈가 몇이니? 몇개 들어가 있어?     // 해당 리스트의 사이즈를 댓글이 몇개 달렸는지를 확인
+        int deletedCommentsSize = article.getArticleComments().size();      // 사이즈가 몇이니? 몇개 들어가 있어?     // 해당 리스트의 사이즈를 댓글이 몇개 달렸는지를 확인
 
         articleRepository.delete(article);      // 원본 글 아티클 제거
 

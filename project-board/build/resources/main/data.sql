@@ -1,3 +1,5 @@
+insert into user_account(user_id, user_pw, nickname, email, memo, created_at, created_by, modified_at, modified_by) values ('apple', '1234', '사과', 'apple@apple.com', '안녕? 난 김사과야', now(), 'admin', now(), 'admin');
+
 insert into article (title, content, hashtag, created_at, created_by, modified_at, modified_by) values ('Treeflex', 'theguardian.com', 'Brass', '2022-08-25', 'Black rhinoceros', '2022-06-18', 'Cape wild cat');
 insert into article (title, content, hashtag, created_at, created_by, modified_at, modified_by) values ('Zoolab', 'smugmug.com', 'Stone', '2022-11-12', 'Gray duiker', '2022-10-14', 'Chital');
 insert into article (title, content, hashtag, created_at, created_by, modified_at, modified_by) values ('Domainer', 'umn.edu', 'Granite', '2022-08-21', 'Painted stork', '2022-07-20', 'Jackrabbit, white-tailed');

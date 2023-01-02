@@ -1,7 +1,7 @@
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.7'
-	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'	// 버전관리하는 녀석. 관리하는데 이녀석이 최적의 버전으로 만들어줌. 따라서 얘가 모르는 라이브러리를 사용할 때는 버전까지 명시해줘야함.
 }
 
 group = 'com.koreait'
@@ -18,7 +18,7 @@ repositories {
 	mavenCentral()
 }
 
-dependencies {
+dependencies {		// ※ 버전이 없는 것은
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
@@ -30,8 +30,41 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'		// JPA 기술
 	runtimeOnly 'com.h2database:h2'						// 실행할 때 동작하게끔1
 	runtimeOnly 'mysql:mysql-connector-java'			// 실행할 때 동작하게끔2
+
+	// Rest Repositories, Rest Repositories HAL Explorer 추가(entity에 대해 기본적인 crud를 만들어줌)
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.data:spring-data-rest-hal-explorer'
+
+	// query DSL 설정
+	implementation "com.querydsl:querydsl-jpa"
+	implementation "com.querydsl:querydsl-core"		// 여기까지 만 있어도 돌아가긴함
+	implementation "com.querydsl:querydsl-collections"		// but 컬렉션까지사용하려고 넣음.
+	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa" // querydsl JPAAnnotationProcessor 사용 지정		// 얘는 특이하게 이 프로세서 등록하는 것이 :jpa 라고 끝나고 그 전에 버전이름이 적혀있음. 그래서 버전생략을 못하므로 저 위의 manage에게 받아와서ㅏ
+	annotationProcessor "jakarta.annotation:jakarta.annotation-api" // java.lang.NoClassDefFoundError (javax.annotation.Generated) 대응 코드		// query dsl 쓰다보면 가끔 에러가 아닌데 날 때가 있음. 그에 대한 대응코드1
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api" // java.lang.NoClassDefFoundError (javax.annotation.Entity) 대응 코드		// query dsl 쓰다보면 가끔 에러가 아닌데 날 때가 있음. 그에 대한 대응코드2
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+
+// Query DSL 설정		// 설정 위해 추가해야되는 내용들
+def generated = 'src/main/generated'	// 를 사요ㅕㅇ하게 되면 que class라는게 ㄴ부적으로 생기는데 얘에 의해 query dsl이 실행된다. 그런데 우리에게 잘 안보이는 곳. build 클래스 하는 부분에 만든다. 근데 이건 intellij가 컴파일하면서 gradle이 읽어들이고 이렇게 두번 읽어서 중복됨. 그래서 따로 잠깐 빼주게 만ㄴ들어서 gradle만 읽도록 만들어줌. 그래서 이쪽으로 옮긴다는 뜻임.
+
+// Query DSL Qclass 파일 생성 위치를 지정
+tasks.withType(JavaCompile){
+	options.getGeneratedSourceOutputDirectory().set(file(generated))
+}
+
+// java source set에 query QClass 위치 추가
+sourceSets {
+	main.java.srcDirs += [ generated ]
+}
+
+// gradle clean시에 Qclass 디렉토리를 삭제		// 없어도 되긴한데 혹시나. 클린하게 만들어줌
+clean {
+	delete file(generated)
+}
+
+

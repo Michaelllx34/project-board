@@ -36,8 +36,11 @@ spring:
       hibernate.format_sql: true              # 예쁘게 출력되게 해줌(한줄로 안나오는걸 나오게 해줌?)
       hibernate.default_batch_fetch_size: 100 # 조인할 때 한번에 셀렉트 하던걸 여러번에 걸쳐 셀렉트 할 때가 있음(하이버네이트 오류)
                                               # 연속되는 셀렉트 할 때 한번에 사용할 수 있도록 size 100까지 뭉쳐서 셀렉트 하게 해달라.
-  h2.console.enabled: true
-  sql.init.mode: always                       # 시작하자마자 쿼리문을 쓰고 싶을 때. 프로그램이 동작과 동시에 시작하게끔 만들 수 있음.
+  # h2.console.enabled: true                  # 주석 이유: 
+  sql.init.mode: always                       # 시작하자마자 쿼리문을 쓰고 싶을 때. 프로그램이 동작과 동시에 시작하게끔 만들 수 있음.   # 각각의 entity의 CRUD 같은 기본적인 것은 자동으로 만들어줌.
+  data.rest:
+      base-path: /api                         #
+      detection-strategy: annotated           # all은 얘가ㅣ 만든 걸 공짜로 모두 사용할 수 있게끔 public이 됨.   # annotated는 어노테이션 써준 애만 접근가능하도록
 
 server.port: 8889
 
