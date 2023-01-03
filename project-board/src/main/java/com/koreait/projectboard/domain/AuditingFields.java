@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @ToString
 @EntityListeners(AuditingEntityListener.class)  // 여기 선언하면서 ArticleComment쪽에는 빼주기
 @MappedSuperclass                               // 얘가 부모가 될거야
-public class AuditingFields {
+public abstract class AuditingFields {          // 목적에 맞도록 추상클래스로 변경
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @CreatedDate @Column(nullable=false) private LocalDateTime createdAt;          // 생성일시 // @CreatedDate: 생성일시 자동으로 넣어줌
     @CreatedBy@Column(nullable=false, length=100) private String createdBy;        // 생성자   // @CreatedBy:

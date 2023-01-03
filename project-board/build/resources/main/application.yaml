@@ -41,6 +41,7 @@ spring:
   data.rest:
       base-path: /api                         #
       detection-strategy: annotated           # all은 얘가ㅣ 만든 걸 공짜로 모두 사용할 수 있게끔 public이 됨.   # annotated는 어노테이션 써준 애만 접근가능하도록
+  thymeleaf3.decoupled-logic: true            # decoupled logic(230103)
 
 server.port: 8889
 
@@ -74,3 +75,5 @@ server.port: 8889
 #      hibernate.default_batch_fetch_size: 100
 #  h2.console.enabled: true
 #  sql.init.mode: always
+
+

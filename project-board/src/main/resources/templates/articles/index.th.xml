@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="#header" th:replace="header :: header"/> <!-- #header 이 부분을 id랑 잘 맞춰줘야 함 -->
+    <attr sel="#footer" th:replace="footer :: footer"/> <!-- "주소"도 가능? -->
+</thlogic>

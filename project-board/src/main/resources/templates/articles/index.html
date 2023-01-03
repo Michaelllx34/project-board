@@ -1,10 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">    <!-- en -> ko 변경 -->
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+    <!-- header 영역 -->
+<!--    <header th:replace="header :: header"></header>    &lt;!&ndash; 뒷부분 header는 header.html의 id같은걸 찾아서 인식. .header 이렇게도 가능. 그래서 fragment안 써줘도 인식하는것이고, 다만 지금은 header로 된 것이 하나뿐이라 인식 잘되는것. &ndash;&gt;-->
+    <!-- header 영역 끝 -->
+
+    <header id="header"></header>
+
+    <main>
+        <form>
+            <label for="search-type">유형</label>
+            <select id="search-type" name="search-type">
+                <option>제목</option>
+                <option>본문</option>
+                <option>ID</option>
+                <option>닉네임</option>
+                <option>해시태그</option>
+            </select>
+            <label for="search-value">검색어</label>
+            <input id="search-value" type="search" placeholder="검색어를 입력하세요" name="search-value">
+            <button type="submit">검색</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>제목</th>
+                    <th>해시태그</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>첫글입니다</th>
+                    <th>#java</th>
+                    <th>김사과</th>
+                    <th>2023-01-03</th>
+                </tr>
+                <tr>
+                    <th>두번째글입니다</th>
+                    <th>#spring</th>
+                    <th>반하나</th>
+                    <th>2023-01-03</th>
+                </tr>
+                <tr>
+                    <th>세번째글입니다</th>
+                    <th>#python</th>
+                    <th>오렌지</th>
+                    <th>2023-01-03</th>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    <!-- footer -->
+<!--    <footer th:replace="footer :: footer"></footer>-->
+    <!-- footer 끝 -->
+
+    <footer id="footer"></footer>
+
 </body>
 </html>
