@@ -16,3 +16,57 @@ Query DSL
 
     // gradle에 넣어서 하는 게 아니라 intellij의 plugin으로 하는게 있는데 개발자가 그만뒀는지 버전업이 안됨.
     // 현재는
+
+
+
+
+
+230103
+    수업 순서
+        - gradle에 타임리프 추가
+        - html 파일 만들기 이전에, 사용하기 위해서는 controller 필요하니까 controller 껍데기 만들기
+        - 테스트 실행
+        - controller 마저 완성
+        - index.html 작성
+        - header, footer
+        - index.html (루트)
+                웹사이트 만들 때 사용자가 만든 프로퍼티를 더 쉽게? 적용시킬 수 잇음
+        - ~를 사용하기 위해 ThymeleafConfig(강사님이 코드 주심)
+        - yaml파일 설정
+        - index와 같은 타임리프 파일을 만든다 -> index.th.xml
+        - ArticleController article함수
+        - detail.html 만들기
+        - detail.th.xml 만들기
+        -
+
+//
+
+수업 순서
+    - gradle에 타임리프 추가
+        implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    - html 파일 만들기 이전에, 사용하기 위해서는 controller 필요하니까 controller 패키지만들기
+    - 그안에 ArticleController만들기
+    - test > ArticleControllerTest read()테스트 실행 --> 뷰가없어서 에러뜸 @disabled 하고 나중에 확인
+    - controller 마저 완성
+    - articles > index.html 작성
+    - header, footer
+    - index.html (루트)
+    - @ConfigurationPropertiesScan 필기
+      - @EnableConfigurationProperties를 이용해 설정 프로퍼티 클래스를 사용하는 경우 클래스가 많아지면
+      코드가 무거워지고 복잡해짐 ==> 그래서 나온게 @ConfigurationPropertiesScan
+          0. build.gradle에 추가
+            annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+          1. ProjectBoardApplication 안에 @ConfigurationPropertiesScan 추가
+          2. config > ThymeleafConfig class추가(강사님이 코드 보내주심)
+          3. application.yaml spring 뒤에 thymeleaf3.decoupled-logic: true 추가
+    - index와 이름이 같은 타임리프 파일을 만든다 -> index.th.xml
+    - ArticleController article함수
+    - detail.html 만들기
+    - detail.th.xml 만들기
+    - build.gradle에 security 추가
+         implementation 'org.springframework.boot:spring-boot-starter-security'
+
+@ConfigureationPropertiesScan
+
+    - @EnableConfigurationProperties를 이용해 설정 프로퍼티 클래스를 사용하는 경우      // 원래는 이걸 각각 다 적용해줘야 하는데 한방에 해결 가능
+        클래스가 많아지면 코드가 무거워지고 복잡해짐

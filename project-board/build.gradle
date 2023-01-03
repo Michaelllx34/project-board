@@ -42,6 +42,15 @@ dependencies {		// ※ 버전이 없는 것은
 	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa" // querydsl JPAAnnotationProcessor 사용 지정		// 얘는 특이하게 이 프로세서 등록하는 것이 :jpa 라고 끝나고 그 전에 버전이름이 적혀있음. 그래서 버전생략을 못하므로 저 위의 manage에게 받아와서ㅏ
 	annotationProcessor "jakarta.annotation:jakarta.annotation-api" // java.lang.NoClassDefFoundError (javax.annotation.Generated) 대응 코드		// query dsl 쓰다보면 가끔 에러가 아닌데 날 때가 있음. 그에 대한 대응코드1
 	annotationProcessor "jakarta.persistence:jakarta.persistence-api" // java.lang.NoClassDefFoundError (javax.annotation.Entity) 대응 코드		// query dsl 쓰다보면 가끔 에러가 아닌데 날 때가 있음. 그에 대한 대응코드2
+
+	// thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	// thymeleaf 파일 따로 만들어주기 위해
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+	// security	(test 관련된 것은 안 넣었음)
+//	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 }
 
 tasks.named('test') {
